@@ -2,27 +2,53 @@
 {
     internal class Program
     {
-        static void Main(string[] args)
+        static double[] ReadArray(int lenght)
         {
-
-            double[] array = new double[8];
-            for (int i = 0; i < 8; i++)
-            {
-                Console.Write($"Введите элемент {i + 1}: ");
-                array[i] = double.Parse(Console.ReadLine());
-            }
-            double sum = 0;
-            int count = 0;
+            double[] array = new double[lenght];
             for (int i = 0; i < array.Length; i++)
             {
-                if (array[i] > 0)
+                Console.Write($"Элемент [{i}]: ");
+                array[i] = double.Parse(Console.ReadLine());
+            }
+            return array;
+        }
+
+        static void PrintArray(double[] array)
+        {
+            foreach (double num in array)
+            {
+                Console.Write(num + " ");
+            }
+            Console.WriteLine();
+        }
+
+        static double AveragePositive(double[] array)
+        {
+            double sum = 0;
+            int count = 0;
+
+            foreach (double num in array)
+            {
+                if (num > 0)
                 {
-                    sum += array[i];
+                    sum += num;
                     count++;
                 }
             }
-            double sredn = sum / count;
-            Console.WriteLine($"Среднее арифметическое равно: {sredn}");
+
+            return count;
+        }
+
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Введите 8 вещественных чисел:");
+            double[] array = ReadArray(8);
+
+            Console.WriteLine("Введенный массив:");
+            PrintArray(array);
+
+            double average = AveragePositive(array);
+            Console.WriteLine($"Среднее арифметическое положительных элементов: {average}");
         }
     }
 }

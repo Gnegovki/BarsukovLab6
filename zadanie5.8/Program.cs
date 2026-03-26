@@ -1,14 +1,14 @@
-﻿namespace zadanie3
+﻿namespace zadanie58
 {
     internal class Program
     {
-        static int[] CreateRandomArray(int lenght, int min, int max)
+        static int[] CreateRandomArray(int size, int min, int max)
         {
-            int[] array = new int[lenght];
+            int[] array = new int[size];
             Random rnd = new Random();
             for (int i = 0; i < array.Length; i++)
             {
-                array[i] = rnd.Next(min, max);
+                array[i] = rnd.Next(min, max + 1);
             }
             return array;
         }
@@ -22,12 +22,12 @@
             Console.WriteLine();
         }
 
-        static int SumNegative(int[] array)
+        static int SumNonNegativePositions(int[] array)
         {
             int sum = 0;
             for (int i = 0; i < array.Length; i++)
             {
-                if (i % 2 == 0 && array[i] < 0)
+                if (i % 2 != 0 && array[i] >= 0)
                 {
                     sum += array[i];
                 }
@@ -37,12 +37,14 @@
 
         static void Main(string[] args)
         {
-            int[] array = CreateRandomArray(20, -50, 50);
-            Console.WriteLine("Массив:");
+            Console.Write("Введите размер массива n: ");
+            int n = int.Parse(Console.ReadLine());
+
+            int[] array = CreateRandomArray(n, -30, 80);
+            Console.WriteLine("Сгенерированный массив:");
             PrintArray(array);
 
-            int sum = SumNegative(array);
-            Console.WriteLine($"Сумма отрицательных элементов на нечетных местах: {sum}");
+            Console.WriteLine($"Сумма неотрицательных элементов на четных местах: {SumNonNegativePositions(array)}");
         }
     }
 }

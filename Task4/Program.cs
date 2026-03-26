@@ -1,4 +1,4 @@
-﻿namespace zadanie3
+﻿namespace Task4
 {
     internal class Program
     {
@@ -8,7 +8,7 @@
             Random rnd = new Random();
             for (int i = 0; i < array.Length; i++)
             {
-                array[i] = rnd.Next(min, max);
+                array[i] = rnd.Next(min, max + 1);
             }
             return array;
         }
@@ -22,27 +22,31 @@
             Console.WriteLine();
         }
 
-        static int SumNegative(int[] array)
+        static double AverageOddPositive(int[] array)
         {
             int sum = 0;
-            for (int i = 0; i < array.Length; i++)
+            int count = 0;
+
+            foreach (int num in array)
             {
-                if (i % 2 == 0 && array[i] < 0)
+                if (num > 0 && num % 2 != 0)
                 {
-                    sum += array[i];
+                    sum += num;
+                    count++;
                 }
             }
-            return sum;
+
+            return count;
         }
 
         static void Main(string[] args)
         {
-            int[] array = CreateRandomArray(20, -50, 50);
+            int[] array = CreateRandomArray(17, -30, 100);
             Console.WriteLine("Массив:");
             PrintArray(array);
 
-            int sum = SumNegative(array);
-            Console.WriteLine($"Сумма отрицательных элементов на нечетных местах: {sum}");
+            double average = AverageOddPositive(array);
+            Console.WriteLine($"Среднее значение нечетных положительных элементов: {average:F2}");
         }
     }
 }

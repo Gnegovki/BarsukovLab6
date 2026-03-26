@@ -1,4 +1,4 @@
-﻿namespace zadanie3
+﻿namespace zadanie5
 {
     internal class Program
     {
@@ -22,27 +22,26 @@
             Console.WriteLine();
         }
 
-        static int SumNegative(int[] array)
+        static int SumIndices(int[] array)
         {
             int sum = 0;
-            for (int i = 0; i < array.Length; i++)
+            for (int i = 0; i < array.Length; i += 2)
             {
-                if (i % 2 == 0 && array[i] < 0)
-                {
-                    sum += array[i];
-                }
+                sum += array[i];
             }
             return sum;
         }
 
         static void Main(string[] args)
         {
-            int[] array = CreateRandomArray(20, -50, 50);
-            Console.WriteLine("Массив:");
+            Console.Write("Введите размер массива n: ");
+            int n = int.Parse(Console.ReadLine());
+
+            int[] array = CreateRandomArray(n, -50, 100);
+            Console.WriteLine("Сгенерированный массив:");
             PrintArray(array);
 
-            int sum = SumNegative(array);
-            Console.WriteLine($"Сумма отрицательных элементов на нечетных местах: {sum}");
+            Console.WriteLine($"Сумма элементов с четными индексами: {SumIndices(array)}");
         }
     }
 }
